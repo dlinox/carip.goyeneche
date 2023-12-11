@@ -5,6 +5,24 @@
         @onCancel="$emit('onCancel')"
         @onSumbit="submit"
     >
+        <template  v-slot:field.figure="{ _field }">
+            <v-autocomplete
+                v-model="form.figure"
+                :items="_field.options"
+                color="primary"
+                :item-title="_field.itemTitle"
+                :item-value="_field.itemValue"
+                :label="_field.label"
+            >
+                <template v-slot:item="{ props, item }">
+                    <v-list-item
+                        v-bind="props"
+                        :prepend-avatar="'/assets/icons/medical/' +item?.raw?.name"
+                        :title="item?.raw?.description"
+                    ></v-list-item>
+                </template>
+            </v-autocomplete>
+        </template>
     </SimpleForm>
 </template>
 

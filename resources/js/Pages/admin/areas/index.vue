@@ -120,10 +120,6 @@
                 </DataTable>
             </v-card>
         </v-container>
-
-        <pre>
-            {{ medicalIcons }}
-        </pre>
     </AdminLayout>
 </template>
 <script setup>
