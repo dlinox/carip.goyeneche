@@ -28,6 +28,8 @@ class Worker extends Model
 
     protected $appends = [
         'full_name',
+        'photo_url',
+        'specialty_name'
     ];
 
     protected $casts = [
@@ -39,6 +41,16 @@ class Worker extends Model
     public function getFullNameAttribute()
     {
         return "{$this->name} {$this->paternal_surname} {$this->maternal_surname}";
+    }
+
+    public function getPhotoUrlAttribute()
+    {
+        return $this->photo ? asset('storage/' . $this->photo) : 's';
+    }
+
+    public function getSpecialtyNameAttribute()
+    {
+        return $this->specialty ? $this->specialty->name : '';
     }
 
     public function specialty()

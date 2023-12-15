@@ -24,6 +24,10 @@ class Authority extends Model
         'updated_at',
     ];
 
+    protected $with = [
+        'worker',
+    ];
+
     public function worker()
     {
         return $this->belongsTo(Worker::class);

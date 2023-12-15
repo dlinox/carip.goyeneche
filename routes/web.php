@@ -108,4 +108,5 @@ Route::middleware('auth')->name('a.')->prefix('a')->group(function () {
     Route::resource('events', \App\Http\Controllers\EventController::class)->middleware(['can:a.events']);
     Route::patch('events/{id}/change-state',  [\App\Http\Controllers\EventController::class, 'changeState'])->middleware(['can:a.events']);
     Route::patch('events/{id}/change-featured', [\App\Http\Controllers\EventController::class, 'changeFeatured'])->middleware(['can:a.events']);
+    
 });

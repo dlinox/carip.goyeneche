@@ -30,6 +30,7 @@ class News extends Model
 
     protected $appends = [
         'image_url',
+        'author_name'
     ];
 
     public function getImageUrlAttribute()
@@ -37,6 +38,10 @@ class News extends Model
         return $this->image ? asset('storage/' . $this->image) : 's';
     }
 
+    public function getAuthorNameAttribute()
+    {
+        return $this->author ? $this->author->full_name : '';
+    }
 
     public $headers =  [
         ['text' => "ID", 'value' => "id", 'short' => false, 'order' => 'ASC'],
@@ -51,6 +56,6 @@ class News extends Model
 
     public function author()
     {
-        return $this->belongsTo(User::class, 'author');
+        return $this->belongsTo(User::class, 'author_id',);
     }
 }
