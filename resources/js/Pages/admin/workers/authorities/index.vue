@@ -68,9 +68,6 @@
     <v-dialog v-model="dialogAssign" width="500">
         <v-form>
             <v-card>
-                <pre>
-                    {{ form }}
-                </pre>
                 <v-toolbar variant="compact" title="Editar" />
                 <v-container>
                     <v-row>
