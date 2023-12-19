@@ -25,12 +25,8 @@ Route::get('/general-information', [\App\Http\Controllers\Api\ApiController::cla
 //sliders
 Route::get('/sliders', [\App\Http\Controllers\Api\ApiController::class, 'sliders']);
 
-
-
 //areas
 Route::get('/areas', [\App\Http\Controllers\Api\ApiController::class, 'areas']);
-
-
 
 //organigrama
 Route::get('/organigrama', [\App\Http\Controllers\Api\ApiController::class, 'organigrama']);
@@ -47,9 +43,9 @@ Route::get('/apoyo-al-diagnostico', [\App\Http\Controllers\Api\ApiController::cl
 
 //cartera de servicios
 Route::get('/cartera-el-diagnostico', [\App\Http\Controllers\Api\ApiController::class, 'caretedeServicios']);
+
 //combocatorias
 Route::get('/convocatorias', [\App\Http\Controllers\Api\ApiController::class, 'convocatorias']);
-
 
 //quinies somos
 Route::get('/quienes-somos', [\App\Http\Controllers\Api\ApiController::class, 'quienesSomos']);

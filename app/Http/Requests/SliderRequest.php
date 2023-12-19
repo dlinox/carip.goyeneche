@@ -19,8 +19,8 @@ class SliderRequest extends FormRequest
         $slider = $this->post('id') ? $this->post('id') : null;
 
         return [
-            'title' =>  'required',
-            'subtitle' =>  'required',
+            'title' =>  'nullable',
+            'subtitle' =>  'nullable',
             'image' => $slider ? 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:4048' : 'required|image|mimes:jpeg,png,jpg,gif,svg|max:4048',
             'more_info_url' =>  'nullable|url',
         ];
@@ -29,8 +29,8 @@ class SliderRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'title.required' => 'El título es requerido',
-            'subtitle.required' => 'El subtítulo es requerido',
+            // 'title.required' => 'El título es requerido',
+            // 'subtitle.required' => 'El subtítulo es requerido',
             'image.required' => 'La imagen es requerida',
             'image.image' => 'El archivo debe ser una imagen',
             'image.mimes' => 'El archivo debe ser una imagen válida',
