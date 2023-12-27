@@ -840,7 +840,7 @@ return [
                     'group' => null,
                 ],
                 [
-                    'title' => "Documentos guiás",
+                    'title' => "Circuitos de atención",
                     'value' => "info",
                     'icon' => "mdi-inbox-arrow-down-outline",
                     'to' => "/a/guidance-documents",
