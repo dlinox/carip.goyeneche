@@ -13,8 +13,9 @@ class Publication extends Model
         'name',
         'image',
         'description',
-        'author',
+        'author_id',
         'is_active',
+        
     ];
 
     protected $hidden = [
@@ -29,6 +30,11 @@ class Publication extends Model
     protected $appends = [
         'image_url',
     ];
+
+    public function author()
+    {
+        return $this->belongsTo(User::class, 'author_id');
+    }
 
     public function getImageUrlAttribute()
     {
@@ -46,6 +52,7 @@ class Publication extends Model
 
     protected $with = [
         'documents',
+        'author'
     ];
 
     public function documents()

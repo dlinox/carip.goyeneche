@@ -855,7 +855,7 @@ return [
             'value' => "plubli",
             'icon' => "mdi-repeat",
             'to' => "mensajes",
-            'can' => 'a.announcements|a.purchase-and-service',
+            'can' => 'a.announcements|a.purchase-and-service|a.publications',
             'group' => [
                 [
                     'title' => "Convocatorias",
@@ -873,6 +873,14 @@ return [
                     'can' => 'a.purchase-and-service',
                     'group' => null,
                 ],
+                [
+                    'title' => "Publicaciones",
+                    'value' => "consultar",
+                    'icon' => "mdi-post",
+                    'to' => "/a/publications",
+                    'can' => 'a.publications',
+                    'group' => null,
+                ],
             ],
         ],
         [
@@ -883,14 +891,7 @@ return [
             'can' => 'a.news',
             'group' => null,
         ],
-        [
-            'title' => "Gestión de publicaciones",
-            'value' => "consultar",
-            'icon' => "mdi-post",
-            'to' => "/a/publications",
-            'can' => 'a.publications',
-            'group' => null,
-        ],
+        
         [
             'title' => "Gestión de campañas y eventos",
             'value' => "consultar",

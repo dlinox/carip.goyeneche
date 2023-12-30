@@ -35,6 +35,8 @@ class PublicationController extends Controller
             $query->where('author_id', auth()->user()->id);
         }
 
+        
+
         // Obtener resultados paginados
         $items = $query->paginate($perPage)->appends($request->query());
 
