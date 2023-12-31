@@ -117,6 +117,13 @@ class ApiController extends Controller
         $news = \App\Models\News::where('is_active', true)->orderBy('created_at', 'DESC')->take(20)->get();
         return response()->json($news);
     }
+
+    //get news by slug
+    public function newsBySlug($slug)
+    {
+        $news = \App\Models\News::where('slug', $slug)->first();
+        return response()->json($news);
+    }
       
     public function eventos () {
         $eventos = Event::all();
