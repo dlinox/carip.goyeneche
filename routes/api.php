@@ -76,6 +76,9 @@ Route::get('/circuitos-de-atencion', [\App\Http\Controllers\Api\ApiController::c
 
 //news
 Route::get('/news', [\App\Http\Controllers\Api\ApiController::class, 'news']);
+//newsBySlug
+Route::get('/news/{slug}', [\App\Http\Controllers\Api\ApiController::class, 'newsBySlug']);
+
 
 //eventos
 Route::get('/eventos', [\App\Http\Controllers\Api\ApiController::class, 'eventos']);
