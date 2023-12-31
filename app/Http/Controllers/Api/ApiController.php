@@ -46,69 +46,93 @@ class ApiController extends Controller
 
 
 
-    public function organigrama(){
+    public function organigrama()
+    {
         $organigrama =  InstitutionalInformation::select('organigram')->first();
         return response()->json($organigrama);
     }
 
-    public function quienesSomos(){
+    public function quienesSomos()
+    {
         $quienesSomos = InstitutionalInformation::select('about_us')->first();
         return response()->json($quienesSomos);
-    }   
+    }
 
-    
 
-    public function autoridades(){
+
+    public function autoridades()
+    {
         $autoridades = Authority::all();
         return response()->json($autoridades);
     }
 
-    public function objetivos(){
+    public function objetivos()
+    {
         $objetivos = InstitutionalObjetive::all();
         return response()->json($objetivos);
     }
 
-    public function misionVision(){
+    public function misionVision()
+    {
         $misionVsion = InstitutionalInformation::select('mission', 'vision')->first();
         return response()->json($misionVsion);
     }
 
-    public function nosotros(){
+    public function nosotros()
+    {
         $nosotros = InstitutionalInformation::select('about_us')->fisrt();
         return response()->json($nosotros);
     }
 
-    
-    public function espcialidadesMedicas(){
-        $especialidadesMedicas = FinalService::where('is_active', true)->get();
-        return response()->json($especialidadesMedicas);
+
+    public function espcialidadesMedicas(Request $request)
+    {
+
+        $itemsPerPage = $request->limit ? $request->limit : 10;
+        $items = FinalService::where('is_active', true)->orderBy('created_at', 'DESC')->paginate($itemsPerPage);
+        return response()->json($items);
     }
 
-    public function apoyoAlDiagnostico(){
+    public function apoyoAlDiagnostico()
+    {
         $apoyoAlDiagnostico = \App\Models\IntermediateService::where('is_active', true)->get();
         return response()->json($apoyoAlDiagnostico);
     }
 
-    public function oficinas(){
-        $oficinas = Office::where('is_active', true)->get();
-        return response()->json($oficinas);
-    }
-
-    public function doctors()
+    public function oficinas(Request $request)
     {
-        $doctors = \App\Models\Worker::where('is_active', true)->get();
-        return response()->json($doctors);
+
+        $itemsPerPage = $request->limit ? $request->limit : 10;
+        $items = Office::where('is_active', true)->orderBy('created_at', 'DESC')->paginate($itemsPerPage);
+        return response()->json($items);
+    }
+
+    public function doctors(Request $request)
+    {
+        $itemsPerPage = $request->limit ? $request->limit : 10;
+        $items = \App\Models\Worker::where('is_active', true)->orderBy('created_at', 'DESC')->paginate($itemsPerPage);
+        return response()->json($items);
     }
 
 
-    public function caretedeServicios(){
-        $carteraDeServicios = ServicePortfolio::where('is_active', true)->get();
-        return response()->json($carteraDeServicios);
+    public function caretedeServicios(Request $request)
+    {
+
+        $itemsPerPage = $request->limit ? $request->limit : 10;
+
+        $items = ServicePortfolio::where('is_active', true)->orderBy('created_at', 'DESC')->paginate($itemsPerPage);
+
+        return response()->json($items);
     }
 
-    public function circuitosDeAtencion(){
-        $circuitosDeAtencion = \App\Models\GuidanceDocument::where('is_active', true)->get();
-        return response()->json($circuitosDeAtencion);
+    public function circuitosDeAtencion(Request $request)
+    {
+
+        $itemsPerPage = $request->limit ? $request->limit : 10;
+
+        $items = \App\Models\GuidanceDocument::where('is_active', true)->orderBy('created_at', 'DESC')->paginate($itemsPerPage);
+
+        return response()->json($items);
     }
 
     public function news(Request $request)
@@ -125,20 +149,24 @@ class ApiController extends Controller
         return response()->json($news);
     }
 
-    public function getNewsByAuthorArea($id){
+    public function getNewsByAuthorArea($id)
+    {
         $news = \App\Models\News::join('users', 'users.id', '=', 'news.author_id')
-        ->join('areas', 'areas.id', '=', 'users.area_id')
-        ->where('areas.id', $id)
-        ->select('news.*')
-        ->get();
+            ->join('areas', 'areas.id', '=', 'users.area_id')
+            ->where('areas.id', $id)
+            ->select('news.*')
+            ->get();
 
         return response()->json($news);
     }
 
-      
-    public function eventos () {
-        $eventos = Event::all();
-        return response()->json($eventos);
+
+    public function eventos(Request $request)
+    {
+
+        $itemsPerPage = $request->limit ? $request->limit : 10;
+        $items = Event::where('is_active', true)->orderBy('created_at', 'DESC')->paginate($itemsPerPage);
+        return response()->json($items);
     }
 
     //get event by slug
@@ -148,27 +176,33 @@ class ApiController extends Controller
         return response()->json($event);
     }
 
-    public function getEventsByAuthorArea($id){
+    public function getEventsByAuthorArea($id)
+    {
         $events = Event::join('users', 'users.id', '=', 'events.author_id')
-        ->join('areas', 'areas.id', '=', 'users.area_id')
-        ->where('areas.id', $id)
-        ->select('events.*')
-        ->get();
+            ->join('areas', 'areas.id', '=', 'users.area_id')
+            ->where('areas.id', $id)
+            ->select('events.*')
+            ->get();
 
         return response()->json($events);
     }
 
 
-    public function convocatorias(){
-        $convocatorias = \App\Models\Announcement::where('is_active', true)->get();
-        return response()->json($convocatorias);
+    public function convocatorias(Request $request)
+    {
+
+        $itemsPerPage = $request->limit ? $request->limit : 10;
+
+        $items = \App\Models\Announcement::where('is_active', true)->orderBy('created_at', 'DESC')->paginate($itemsPerPage);
+
+        return response()->json($items);
     }
 
-    public function publicaciones(Request $request){
+    public function publicaciones(Request $request)
+    {
 
         //añadir paginacion
-
-        $itemsPerPage = $request->input('itemsPerPage') || 10;
+        $itemsPerPage = $request->limit ? $request->limit : 10;
 
         $items =  \App\Models\Publication::where('is_active', true)->orderBy('created_at', 'DESC')->paginate($itemsPerPage);
 
@@ -176,21 +210,20 @@ class ApiController extends Controller
         return response()->json($items);
     }
 
-    public function publicacionesBySlug($slug){
+    public function publicacionesBySlug($slug)
+    {
         $publicaciones = \App\Models\Publication::where('slug', $slug)->first();
         return response()->json($publicaciones);
     }
 
-    public function getPublicacionesByAuthorArea($id){
+    public function getPublicacionesByAuthorArea($id)
+    {
         $publicaciones = \App\Models\Publication::join('users', 'users.id', '=', 'publications.author_id')
-        ->join('areas', 'areas.id', '=', 'users.area_id')
-        ->where('areas.id', $id)
-        ->select('publications.*')
-        ->get();
+            ->join('areas', 'areas.id', '=', 'users.area_id')
+            ->where('areas.id', $id)
+            ->select('publications.*')
+            ->get();
 
         return response()->json($publicaciones);
     }
-
-
-
 }
