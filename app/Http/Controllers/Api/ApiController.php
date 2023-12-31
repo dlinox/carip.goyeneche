@@ -168,7 +168,7 @@ class ApiController extends Controller
 
         //añadir paginacion
 
-        $itemsPerPage = 10;
+        $itemsPerPage = 2;
         
         $items =  \App\Models\Publication::where('is_active', true)->orderBy('created_at', 'DESC')->paginate($itemsPerPage);
 
