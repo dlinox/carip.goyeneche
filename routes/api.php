@@ -78,6 +78,8 @@ Route::get('/circuitos-de-atencion', [\App\Http\Controllers\Api\ApiController::c
 Route::get('/news', [\App\Http\Controllers\Api\ApiController::class, 'news']);
 //newsBySlug
 Route::get('/news/{slug}', [\App\Http\Controllers\Api\ApiController::class, 'newsBySlug']);
+//getNewsByAuthorArea
+Route::get('/news/author-area/{id}', [\App\Http\Controllers\Api\ApiController::class, 'getNewsByAuthorArea']);
 
 
 //eventos

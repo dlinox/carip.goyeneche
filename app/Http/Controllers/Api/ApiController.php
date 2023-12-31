@@ -124,6 +124,17 @@ class ApiController extends Controller
         $news = \App\Models\News::where('slug', $slug)->first();
         return response()->json($news);
     }
+
+    public function getNewsByAuthorArea($id){
+        $news = \App\Models\News::join('users', 'users.id', '=', 'news.author_id')
+        ->join('areas', 'areas.id', '=', 'users.area_id')
+        ->where('areas.id', $id)
+        ->select('news.*')
+        ->get();
+        
+        return response()->json($news);
+    }
+
       
     public function eventos () {
         $eventos = Event::all();
