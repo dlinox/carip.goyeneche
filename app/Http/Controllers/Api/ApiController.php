@@ -131,7 +131,7 @@ class ApiController extends Controller
         ->where('areas.id', $id)
         ->select('news.*')
         ->get();
-        
+
         return response()->json($news);
     }
 
@@ -140,6 +140,24 @@ class ApiController extends Controller
         $eventos = Event::all();
         return response()->json($eventos);
     }
+
+    //get event by slug
+    public function eventBySlug($slug)
+    {
+        $event = Event::where('slug', $slug)->first();
+        return response()->json($event);
+    }
+
+    public function getEventsByAuthorArea($id){
+        $events = Event::join('users', 'users.id', '=', 'events.author_id')
+        ->join('areas', 'areas.id', '=', 'users.area_id')
+        ->where('areas.id', $id)
+        ->select('events.*')
+        ->get();
+
+        return response()->json($events);
+    }
+
 
     public function convocatorias(){
         $convocatorias = \App\Models\Announcement::where('is_active', true)->get();
