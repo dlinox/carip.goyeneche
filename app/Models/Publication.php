@@ -15,6 +15,7 @@ class Publication extends Model
         'description',
         'author_id',
         'is_active',
+        'slug'
         
     ];
 
@@ -30,6 +31,8 @@ class Publication extends Model
     protected $appends = [
         'image_url',
     ];
+
+
 
     public function author()
     {
@@ -59,4 +62,6 @@ class Publication extends Model
     {
         return $this->hasMany(PublicationDocument::class, 'publication_id');
     }
+
+    
 }

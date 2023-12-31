@@ -30,12 +30,12 @@ class PublicationController extends Controller
             $query->where('name', 'like', '%' . $searchTerm . '%');
         }
 
-        
+
         if (auth()->user()->role !== 'Administrador') {
             $query->where('author_id', auth()->user()->id);
         }
 
-        
+
 
         // Obtener resultados paginados
         $items = $query->paginate($perPage)->appends($request->query());
@@ -61,6 +61,11 @@ class PublicationController extends Controller
                 $publication = Publication::find($request->id);
                 $publication->name = $request->name;
                 $publication->description = $request->description;
+
+                $slug = strtolower($request->name);
+                $slug = str_replace(' ', '-', $slug);
+                $publication->slug = $slug;
+
                 if ($request->hasFile('image')) {
                     $publication->image = $request->file('image')->store('publications', 'public');
                 }
@@ -71,17 +76,25 @@ class PublicationController extends Controller
                         'name' => $document['fileName'],
                         'file' => $document['file'][0]->store('documents/publications', 'public'),
                         'date_published' => $document['fileDate'],
+
                     ]);
                 }
 
                 $publication->save();
             } else {
 
+
+                $slug = strtolower($request->name);
+                $slug = str_replace(' ', '-', $slug);
+
+
                 $publication = Publication::create([
                     'name' => $request->name,
                     'description' => $request->description,
                     'author_id' => auth()->user()->id,
                     'image' => $request->file('image')->store('publications', 'public'),
+                    'slug' => $slug,
+
                 ]);
 
                 $documents = $request->documents ? $request->documents : [];
@@ -96,14 +109,12 @@ class PublicationController extends Controller
             }
 
             DB::commit();
-            
-            return redirect()->back()->with('success', 'Elemento creado exitosamente.');
 
+            return redirect()->back()->with('success', 'Elemento creado exitosamente.');
         } catch (\Throwable $th) {
             DB::rollBack();
             return redirect()->back()->withErrors(['Error al crear el elemento.', $th->getMessage()]);
         }
-        
     }
 
 

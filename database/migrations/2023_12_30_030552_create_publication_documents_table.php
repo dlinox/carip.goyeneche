@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->string('file');
             $table->date('date_published');
+            $table->string("slug")->nullable();
             $table->boolean('is_active')->default(true);
             $table->unsignedBigInteger('publication_id');
             $table->foreign('publication_id')->references('id')->on('publications')->onUpdate('cascade')->onDelete('no action');
