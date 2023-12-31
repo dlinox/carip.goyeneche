@@ -29,6 +29,12 @@ class Event extends Model
 
     ];
 
+    protected $with = [
+        
+        'author'
+    ];
+
+
     protected $appends = [
         'image_url',
     ];
