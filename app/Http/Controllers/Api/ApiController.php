@@ -93,10 +93,14 @@ class ApiController extends Controller
         return response()->json($items);
     }
 
-    public function apoyoAlDiagnostico()
+    public function apoyoAlDiagnostico(Request $request)
     {
-        $apoyoAlDiagnostico = \App\Models\IntermediateService::where('is_active', true)->get();
-        return response()->json($apoyoAlDiagnostico);
+
+        $itemsPerPage = $request->limit ? $request->limit : 10;
+
+        $items = \App\Models\IntermediateService::where('is_active', true)->orderBy('created_at', 'DESC')->paginate($itemsPerPage);
+
+        return response()->json($items);
     }
 
     public function oficinas(Request $request)
