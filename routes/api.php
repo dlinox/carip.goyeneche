@@ -93,3 +93,8 @@ Route::get('/convocatorias', [\App\Http\Controllers\Api\ApiController::class, 'c
 
 //publicaciones
 Route::get('/publicaciones', [\App\Http\Controllers\Api\ApiController::class, 'publicaciones']);
+//publicaciones by slug
+Route::get('/publicaciones/{slug}', [\App\Http\Controllers\Api\ApiController::class, 'publicacionesBySlug']);
+//getPublicacionesByAuthorArea
+Route::get('/publicaciones/author-area/{id}', [\App\Http\Controllers\Api\ApiController::class, 'getPublicacionesByAuthorArea']);
+

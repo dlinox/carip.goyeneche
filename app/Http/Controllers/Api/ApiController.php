@@ -169,4 +169,21 @@ class ApiController extends Controller
         return response()->json($publicaciones);
     }
 
+    public function publicacionesBySlug($slug){
+        $publicaciones = \App\Models\Publication::where('slug', $slug)->first();
+        return response()->json($publicaciones);
+    }
+
+    public function getPublicacionesByAuthorArea($id){
+        $publicaciones = \App\Models\Publication::join('users', 'users.id', '=', 'publications.author_id')
+        ->join('areas', 'areas.id', '=', 'users.area_id')
+        ->where('areas.id', $id)
+        ->select('publications.*')
+        ->get();
+
+        return response()->json($publicaciones);
+    }
+
+
+
 }
