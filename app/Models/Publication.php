@@ -30,8 +30,13 @@ class Publication extends Model
 
     protected $appends = [
         'image_url',
+        'area_name',
     ];
 
+    public function getAreaNameAttribute()
+    {
+        return $this->author->area->name;
+    }
 
 
     public function author()
@@ -49,6 +54,8 @@ class Publication extends Model
         ['text' => "ID", 'value' => "id", 'short' => false, 'order' => 'ASC'],
         ['text' => "Nombre", 'value' => "name", 'short' => false, 'order' => 'ASC'],
         ['text' => "Documentos", 'value' => "documents", 'short' => false, 'order' => 'ASC'],
+        ['text' => "Area", 'value' => "area_name", 'short' => false, 'order' => 'ASC'],
+        
 
         ['text' => "Estado", 'value' => "is_active", 'short' => false, 'order' => 'ASC'],
     ];
