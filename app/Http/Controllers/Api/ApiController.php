@@ -113,7 +113,7 @@ class ApiController extends Controller
 
     public function news(Request $request)
     {
-        $itemsPerPage = $request->input('itemsPerPage') || 10;
+        $itemsPerPage = $request->limit ? $request->limit : 10;
         $items = \App\Models\News::where('is_active', true)->orderBy('created_at', 'DESC')->paginate($itemsPerPage);
         return response()->json($items);
     }
