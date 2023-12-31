@@ -111,11 +111,11 @@ class ApiController extends Controller
         return response()->json($circuitosDeAtencion);
     }
 
-    public function news()
+    public function news(Request $request)
     {
-        //get 10 last news
-        $news = \App\Models\News::where('is_active', true)->orderBy('created_at', 'DESC')->take(20)->get();
-        return response()->json($news);
+        $itemsPerPage = $request->input('itemsPerPage') || 10;
+        $items = \App\Models\News::where('is_active', true)->orderBy('created_at', 'DESC')->paginate($itemsPerPage);
+        return response()->json($items);
     }
 
     //get news by slug
@@ -164,12 +164,12 @@ class ApiController extends Controller
         return response()->json($convocatorias);
     }
 
-    public function publicaciones(){
+    public function publicaciones(Request $request){
 
         //añadir paginacion
 
-        $itemsPerPage = 2;
-        
+        $itemsPerPage = $request->input('itemsPerPage') || 10;
+
         $items =  \App\Models\Publication::where('is_active', true)->orderBy('created_at', 'DESC')->paginate($itemsPerPage);
 
         // $publicaciones = \App\Models\Publication::where('is_active', true)->get();
