@@ -84,9 +84,9 @@ Route::get('/news/author-area/{id}', [\App\Http\Controllers\Api\ApiController::c
 //eventos
 Route::get('/eventos', [\App\Http\Controllers\Api\ApiController::class, 'eventos']);
 //eventosBySlug
-Route::get('/eventos/{slug}', [\App\Http\Controllers\Api\ApiController::class, 'eventosBySlug']);
+Route::get('/eventos/{slug}', [\App\Http\Controllers\Api\ApiController::class, 'eventBySlug']);
 //getEventosByAuthorArea
-Route::get('/eventos/author-area/{id}', [\App\Http\Controllers\Api\ApiController::class, 'getEventosByAuthorArea']);
+Route::get('/eventos/author-area/{id}', [\App\Http\Controllers\Api\ApiController::class, 'getEventsByAuthorArea']);
 
 //convocatorias
 Route::get('/convocatorias', [\App\Http\Controllers\Api\ApiController::class, 'convocatorias']);
