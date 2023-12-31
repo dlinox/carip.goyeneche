@@ -165,8 +165,15 @@ class ApiController extends Controller
     }
 
     public function publicaciones(){
-        $publicaciones = \App\Models\Publication::where('is_active', true)->get();
-        return response()->json($publicaciones);
+
+        //añadir paginacion
+
+        $itemsPerPage = 10;
+        
+        $items =  \App\Models\Publication::where('is_active', true)->orderBy('created_at', 'DESC')->paginate($itemsPerPage);
+
+        // $publicaciones = \App\Models\Publication::where('is_active', true)->get();
+        return response()->json($items);
     }
 
     public function publicacionesBySlug($slug){
