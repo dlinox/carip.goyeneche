@@ -59,8 +59,8 @@ const props = defineProps({
 });
 
 const form = useForm({
-    email: "admin@goyeneche.pe",
-    password: "password",
+    email: "",
+    password: "",
 });
 
 const signInHandler = async () => {
