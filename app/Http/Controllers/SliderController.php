@@ -64,6 +64,8 @@ class SliderController extends Controller
                 $slider->update($data);
                 if ($request->hasFile('image')) {
                     $slider->image = $request->file('image')->store('sliders', 'public');
+
+
                     $slider->save();
                 }
                 return redirect()->back()->with('success', 'El slider se ha actualizado correctamente');

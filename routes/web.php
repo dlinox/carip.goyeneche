@@ -20,6 +20,10 @@ Route::name('auth.')->prefix('auth')->group(function () {
     Route::post('sign-in',  [AuthController::class, 'signIn'])->name('sign-in')->middleware('guest');
     Route::post('sign-out',  [AuthController::class, 'signOut'])->name('sign-out')->middleware('auth');
 
+    //change-password
+
+    Route::post('change-password',  [AuthController::class, 'changePassword'])->name('change-password')->middleware('auth');
+
     //Rutas para el recupero de contraseña
     Route::get('/forgot-password',  [AuthController::class, 'forgotPassword'])->middleware('guest')->name('password.request');
     Route::post('/forgot-password',  [AuthController::class, 'sendPasswordResetLink'])->middleware('guest')->name('password.email');

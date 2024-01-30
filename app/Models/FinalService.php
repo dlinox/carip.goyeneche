@@ -30,11 +30,17 @@ class FinalService extends Model
 
     protected $appends = [
         'image_url',
+        'specialty_name',
     ];
 
     public function getImageUrlAttribute()
     {
-        return asset('storage/' . $this->image);
+        return asset('uploads/' . $this->image);
+    }
+
+    public function getSpecialtyNameAttribute()
+    {
+        return $this->specialty ? $this->specialty->name : '';
     }
 
     public function specialty()

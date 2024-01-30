@@ -35,7 +35,7 @@ class News extends Model
 
     public function getImageUrlAttribute()
     {
-        return $this->image ? asset('storage/' . $this->image) : 's';
+        return $this->image ? asset('uploads/' . $this->image) : 's';
     }
 
     public function getAuthorNameAttribute()

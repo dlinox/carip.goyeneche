@@ -39,6 +39,26 @@ class AuthController extends Controller
         return redirect('/');
     }
 
+    public function changePassword(Request $request)
+    {
+        $request->validate([
+            "password" => ["required"],
+        ]);
+
+        $user = Auth::user();
+
+        if ($user) {
+            $user->password = $request->password;
+            $user->save();
+
+            return back()->with("success", "Se ha cambiado la contraseña correctamente.");
+        }
+
+        return back()->withErrors("error", "No se podido cambiar la contraseña.");
+
+
+    }
+
     public function forgotPassword()
     {
         return Inertia::render('auth/forgot-password');
@@ -66,8 +86,6 @@ class AuthController extends Controller
         }
 
         return back()->withErrors("error", "No se ha encontrado un usuario con ese correo electrónico.");
-
-
     }
 
     public function resetPassword(Request $request)
