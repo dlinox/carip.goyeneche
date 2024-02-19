@@ -16,7 +16,7 @@ class Publication extends Model
         'author_id',
         'is_active',
         'slug'
-        
+
     ];
 
     protected $hidden = [
@@ -46,16 +46,16 @@ class Publication extends Model
 
     public function getImageUrlAttribute()
     {
-        return $this->image ? asset('storage/' . $this->image) : '';
+
+        return $this->image ? asset('uploads/' . $this->image) : null;
     }
-    
 
     public $headers =  [
         ['text' => "ID", 'value' => "id", 'short' => false, 'order' => 'ASC'],
         ['text' => "Nombre", 'value' => "name", 'short' => false, 'order' => 'ASC'],
         ['text' => "Documentos", 'value' => "documents", 'short' => false, 'order' => 'ASC'],
         ['text' => "Area", 'value' => "area_name", 'short' => false, 'order' => 'ASC'],
-        
+
 
         ['text' => "Estado", 'value' => "is_active", 'short' => false, 'order' => 'ASC'],
     ];
@@ -69,6 +69,4 @@ class Publication extends Model
     {
         return $this->hasMany(PublicationDocument::class, 'publication_id');
     }
-
-    
 }

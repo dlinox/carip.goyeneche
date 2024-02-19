@@ -73,6 +73,10 @@ return [
             'menu' => 'Slider',
         ],
         [
+            'name' => 'a.advertisements',
+            'menu' => 'Avisos',
+        ],
+        [
             'name' => 'a.final-services',
             'menu' => 'Servicios finales',
         ],
@@ -781,9 +785,17 @@ return [
 
                 [
                     'title' => "Slider",
-                    'value' => "web",
+                    'value' => "slider",
                     'to' => "/a/sliders",
                     'can' => 'a.sliders',
+                    'group' => null,
+                ],
+
+                [
+                    'title' => "Avisos",
+                    'value' => "avisos",
+                    'to' => "/a/advertisements",
+                    'can' => 'a.advertisements',
                     'group' => null,
                 ],
             ],

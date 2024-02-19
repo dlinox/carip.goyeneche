@@ -4,14 +4,34 @@
             <v-btn class="me-2" icon="mdi-menu" @click="drawer = !drawer">
             </v-btn>
             <v-spacer></v-spacer>
-            <v-avatar
-                @click="signOut"
-                class="me-3"
-                color="surface-variant"
-                size="32"
-                icon="mdi-logout"
-                variant="flat"
-            ></v-avatar>
+            <v-menu transition="scale-transition">
+                <template v-slot:activator="{ props }">
+                    <v-btn
+                        icon
+                        color="primary"
+                        v-bind="props"
+                        density="comfortable"
+                    >
+                        <v-icon>mdi-account-circle</v-icon>
+                    </v-btn>
+                </template>
+
+                <v-list nav>
+                    <v-list-item
+                        title="Cambiar contraseña"
+                        @click="modalChangePassword = true"
+                    >
+                        <template #append>
+                            <v-icon color="blue">mdi-lock-reset</v-icon>
+                        </template>
+                    </v-list-item>
+                    <v-list-item title="Cerrar sesión" @click="signOut">
+                        <template #append>
+                            <v-icon color="red">mdi-logout</v-icon>
+                        </template>
+                    </v-list-item>
+                </v-list>
+            </v-menu>
         </v-app-bar>
         <v-navigation-drawer
             floating
@@ -28,17 +48,6 @@
                     </template>
                 </v-list-item>
             </v-toolbar>
-
-            <div class="pa-2">
-                <v-btn
-                    block
-                    variant="tonal"
-                    color="blue"
-                    @click="modalChangePassword = true"
-                >
-                    Cambiar contraseña
-                </v-btn>
-            </div>
 
             <MenuApp :userRole="user?.role" :userArea="user?.area_id" />
         </v-navigation-drawer>
@@ -113,19 +122,14 @@
                 <v-card-actions>
                     <v-spacer></v-spacer>
                     <v-btn
-                        color="blue"
-                        text
+                        color="red"
+                        variant="tonal"
                         @click="modalChangePassword = false"
                         :disabled="form.loading"
                     >
                         Cancelar
                     </v-btn>
-                    <v-btn
-                        color="blue"
-                        text
-                        @click="changePassword"
-                        :disabled="form.loading"
-                    >
+                    <v-btn @click="changePassword" :disabled="form.loading">
                         Cambiar
                     </v-btn>
                 </v-card-actions>

@@ -8,7 +8,7 @@
         <template #field.photo>
             <v-card variant="tonal">
                 <CropCompressImage
-                    :aspect-ratio="16 / 9"
+                    :aspect-ratio="1"
                     @onCropper="
                         (previewImg = $event.blob), (form.photo = $event.file)
                     "

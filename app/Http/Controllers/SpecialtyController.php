@@ -25,6 +25,7 @@ class SpecialtyController extends Controller
         if ($request->has('search')) {
             $query->where('name', 'LIKE', "%{$request->search}%");
         }
+        
 
         $items = $query->paginate($perPage)->appends($request->query());
 

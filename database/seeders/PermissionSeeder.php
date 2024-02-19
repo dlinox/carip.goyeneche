@@ -33,6 +33,10 @@ class PermissionSeeder extends Seeder
                 'menu' => 'Slider',
             ],
             [
+                'name' => 'a.advertisements',
+                'menu' => 'Avisos',
+            ],
+            [
                 'name' => 'a.final-services',
                 'menu' => 'Servicios finales',
             ],

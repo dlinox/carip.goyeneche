@@ -2,7 +2,7 @@
     <AdminLayout>
         <HeadingPage :title="title" :subtitle="subtitle">
             <template #actions>
-                <BtnDialog title="Registrar Area" width="700px">
+                <BtnDialog title="Registrar Slider" width="700px">
                     <template v-slot:activator="{ dialog }">
                         <v-btn
                             @click="dialog"
@@ -43,12 +43,21 @@
                         </div>
                     </template>
 
-                    <template v-slot:item.figure="{ item }">
+                    <template v-slot:item.image_url="{ item }">
                         <v-img
-                            width="40px"
-                            :src="`/assets/icons/medical/${item.figure}`"
-                        />
+                            :src="item.image_url"
+                            width="100"
+                            height="100"
+                            contain
+                        ></v-img>
                     </template>
+
+                    <template v-slot:item.more_info_url="{ item }">
+                        <a :href="item.more_info_url" target="_blank">
+                            {{ item.more_info_url }}
+                        </a>
+                    </template>
+
                     <template v-slot:item.is_active="{ item }">
                         <v-btn
                             :color="item.is_active ? 'blue' : 'red'"
@@ -92,7 +101,7 @@
                                     @on-cancel="dialog"
                                     :form-data="item"
                                     :edit="true"
-                                    :url="url + '/' + item[`${primaryKey}`]"
+                                    :url="url"
                                 />
                             </template>
                         </BtnDialog>
@@ -127,7 +136,7 @@ import BtnDialog from "@/components/BtnDialog.vue";
 import DialogConfirm from "@/components/DialogConfirm.vue";
 import DataTable from "@/components/DataTable.vue";
 import { router } from "@inertiajs/core";
-import create from "@/Pages/admin/areas/create.vue";
+import create from "@/Pages/admin/sliders/create.vue";
 
 const props = defineProps({
     title: String,
@@ -135,37 +144,34 @@ const props = defineProps({
     items: Object,
     headers: Object,
     filters: Object,
-    medicalIcons: Array,
 });
 
 const primaryKey = "id";
-const url = "/a/areas";
+const url = "/a/advertisements";
 
 const formStructure = [
     {
-        key: "name",
-        label: "Nombre",
+        key: "image",
+        label: "Imagen",
+        type: "file",
+        required: true,
+        cols: 12,
+        default: "",
+    },
+    {
+        key: "title",
+        label: "Titulo",
         type: "text",
-        required: true,
+        required: false,
         cols: 12,
         default: "",
     },
+
     {
-        key: "description",
-        label: "Descripción",
-        type: "textarea",
-        required: true,
-        cols: 12,
-        default: "",
-    },
-    {
-        key: "figure",
-        label: "Figura",
-        type: "combobox",
-        options: props.medicalIcons,
-        itemValue: "name",
-        itemTitle: "description",
-        required: true,
+        key: "more_info_url",
+        label: "Url de mas informacion",
+        type: "text",
+        required: false,
         cols: 12,
         default: null,
     },

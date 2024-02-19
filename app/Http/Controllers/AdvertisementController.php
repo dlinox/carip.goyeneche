@@ -2,25 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\SliderRequest;
-use App\Models\Slider;
+use App\Http\Requests\AdvertisementRequest;
+use App\Models\Advertisement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
-class SliderController extends Controller
+class AdvertisementController extends Controller
 {
 
-    protected $slider;
+    protected $advertisement;
     public function __construct()
     {
-        $this->slider = new Slider();
+        $this->advertisement = new Advertisement();
     }
 
     public function index(Request $request)
     {
         $perPage = $request->input('perPage', 10);
-        $query = Slider::query();
+        $query = Advertisement::query();
 
         // Búsqueda por nombre de área
         if ($request->has('search')) {
@@ -36,11 +36,11 @@ class SliderController extends Controller
         // Obtener resultados paginados
         $items = $query->paginate($perPage)->appends($request->query());
 
-        return Inertia::render('admin/sliders/index', [
-            'title' => 'Sliders',
-            'subtitle' => 'Gestión de sliders',
+        return Inertia::render('admin/advertisements/index', [
+            'title' => 'Avisos',
+            'subtitle' => 'Gestión de avisos',
             'items' => $items,
-            'headers' => $this->slider->headers,
+            'headers' => $this->advertisement->headers,
             'filters' => [
                 'search' => $request->search,
             ],
@@ -49,7 +49,7 @@ class SliderController extends Controller
         
     }
 
-    public function store(SliderRequest $request)
+    public function store(AdvertisementRequest $request)
     {
         try{
             $data = [
@@ -59,13 +59,12 @@ class SliderController extends Controller
             ];
     
             if ($request->id) {
-                $slider = Slider::find($request->id);
-                $slider->update($data);
+                $advertisement = Advertisement::find($request->id);
+                $advertisement->update($data);
                 if ($request->hasFile('image')) {
-                    $slider->image = $request->file('image')->store('sliders', 'public');
+                    $advertisement->image = $request->file('image')->store('advertisements', 'public');
 
-
-                    $slider->save();
+                    $advertisement->save();
                 }
                 return redirect()->back()->with('success', 'El slider se ha actualizado correctamente');
             }
@@ -73,9 +72,9 @@ class SliderController extends Controller
             $data['author_id'] = auth()->user()->id;
             // Guardar imagen
             if ($request->hasFile('image')) {
-                $data['image'] = $request->file('image')->store('sliders', 'public');
+                $data['image'] = $request->file('image')->store('advertisements', 'public');
             }
-            $slider = Slider::create($data);
+            $advertisement = Advertisement::create($data);
             return redirect()->back()->with('success', 'El slider se ha creado correctamente');
         }
         catch(\Exception $e){
@@ -89,13 +88,13 @@ class SliderController extends Controller
     public function destroy( $id)
     {
         try{
-            $slider = Slider::findOrFail($id);
+            $advertisement = Advertisement::findOrFail($id);
             // Eliminar imagen
-            if ($slider->image) {
-                Storage::disk('public')->delete($slider->image);
+            if ($advertisement->image) {
+                Storage::disk('public')->delete($advertisement->image);
             }
             // Eliminar slider
-            $slider->delete();
+            $advertisement->delete();
 
             return redirect()->back()->with('success', 'El slider se ha eliminado correctamente');
         }
@@ -110,9 +109,9 @@ class SliderController extends Controller
     public function changeState($id)
     {
         try {
-            $slider = $this->slider->findOrFail($id);
-            $slider->is_active = !$slider->is_active;
-            $slider->save();
+            $advertisement = $this->advertisement->findOrFail($id);
+            $advertisement->is_active = !$advertisement->is_active;
+            $advertisement->save();
             return redirect()->back()->with('success', 'Slider actualizado correctamente');
         } catch (\Exception $e) {
             return redirect()->back()->withErrors([

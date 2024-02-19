@@ -68,6 +68,10 @@ Route::middleware('auth')->name('a.')->prefix('a')->group(function () {
     //sliders
     Route::resource('sliders', \App\Http\Controllers\SliderController::class)->middleware(['can:a.sliders']);
     Route::patch('sliders/{id}/change-state',  [\App\Http\Controllers\SliderController::class, 'changeState'])->middleware(['can:a.sliders']);
+    
+    //advertisements
+    Route::resource('advertisements', \App\Http\Controllers\AdvertisementController::class)->middleware(['can:a.advertisements']);
+    Route::patch('advertisements/{id}/change-state',  [\App\Http\Controllers\AdvertisementController::class, 'changeState'])->middleware(['can:a.advertisements']);
 
     //final-services
     Route::resource('final-services', \App\Http\Controllers\FinalServiceController::class)->middleware(['can:a.final-services']);

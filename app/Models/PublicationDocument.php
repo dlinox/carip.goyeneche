@@ -34,6 +34,7 @@ class PublicationDocument extends Model
 
     public function getFileUrlAttribute()
     {
-        return $this->file ? asset('storage/' . $this->file) : '';
+        return $this->file ? asset('uploads/' . $this->file) : null;
+
     }
 }

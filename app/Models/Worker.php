@@ -37,7 +37,7 @@ class Worker extends Model
         'is_doctor' => 'boolean',
         'is_authority' => 'boolean',
     ];
-    
+
     public function getFullNameAttribute()
     {
         return "{$this->name} {$this->paternal_surname} {$this->maternal_surname}";
@@ -45,7 +45,8 @@ class Worker extends Model
 
     public function getPhotoUrlAttribute()
     {
-        return $this->photo ? asset('storage/' . $this->photo) : 's';
+
+        return $this->photo ? asset('uploads/' . $this->photo) : null;
     }
 
     public function getSpecialtyNameAttribute()
@@ -65,5 +66,4 @@ class Worker extends Model
         ['text' => "Activo", 'value' => "is_active"],
         // ['text' => "Acciones", 'value' => "actions", 'sortable' => false],
     ];
-
 }

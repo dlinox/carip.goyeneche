@@ -28,7 +28,8 @@ class PublicationRequest extends FormRequest
             'name' => 'required|string',
             'description' => 'required|string',
             'image' => $publication ? 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048' : 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'documents' => $document . 'array',
+            'documents' => 'nullable|array',
+            // 'documents' => $document . 'array',
             'documents.*.fileName' => $document . 'string',
             'documents.*.file' =>  $document . 'array',
             'documents.*.file.*' => $document . 'file|mimes:pdf|max:10240', // Asegura que cada elemento en el array sea un archivo.
@@ -51,7 +52,7 @@ class PublicationRequest extends FormRequest
             'image.mimes' => 'El archivo debe ser una imagen válida',
             'image.max' => 'El archivo no debe pesar más de 2MB',
 
-            'documents.required' => 'El campo documento es requerido.',
+            'documents.required' => 'El campo documento es requerido2.',
             'documents.array' => 'El campo documento debe ser un array.',
             'documents.*.fileName' => 'El campo nombre del documento es requerido.',
             'documents.*.fileDate' => 'El campo fecha del documento es requerido.',
@@ -62,5 +63,4 @@ class PublicationRequest extends FormRequest
 
         ];
     }
-
 }

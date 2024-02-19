@@ -6,13 +6,9 @@
         @onSumbit="submit"
     >
         <template #field.image>
-            <v-alert v-if="form.errors.image" variant="tonal"   type="error" density="compact">
-               {{ form.errors.image }}
-            </v-alert>
-            
             <v-card variant="tonal">
                 <CropCompressImage
-                    :aspect-ratio="1 / 1"
+                    :aspect-ratio="21 / 9"
                     @onCropper="
                         (previewImg = $event.blob), (form.image = $event.file)
                     "

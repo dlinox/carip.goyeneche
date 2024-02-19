@@ -80,6 +80,8 @@ Route::get('/news', [\App\Http\Controllers\Api\ApiController::class, 'news']);
 Route::get('/news/{slug}', [\App\Http\Controllers\Api\ApiController::class, 'newsBySlug']);
 //getNewsByAuthorArea
 Route::get('/news/author-area/{id}', [\App\Http\Controllers\Api\ApiController::class, 'getNewsByAuthorArea']);
+//getNewsRelated
+Route::get('/news/related/{id}', [\App\Http\Controllers\Api\ApiController::class, 'getNewsRelated']);
 
 //eventos
 Route::get('/eventos', [\App\Http\Controllers\Api\ApiController::class, 'eventos']);
@@ -93,8 +95,8 @@ Route::get('/convocatorias', [\App\Http\Controllers\Api\ApiController::class, 'c
 
 //publicaciones
 Route::get('/publicaciones', [\App\Http\Controllers\Api\ApiController::class, 'publicaciones']);
+
 //publicaciones by slug
 Route::get('/publicaciones/{slug}', [\App\Http\Controllers\Api\ApiController::class, 'publicacionesBySlug']);
 //getPublicacionesByAuthorArea
 Route::get('/publicaciones/author-area/{id}', [\App\Http\Controllers\Api\ApiController::class, 'getPublicacionesByAuthorArea']);
-

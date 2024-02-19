@@ -7,6 +7,7 @@ use App\Models\Publication;
 use App\Models\PublicationDocument;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Inertia\Inertia;
 
 class PublicationController extends Controller
@@ -62,8 +63,9 @@ class PublicationController extends Controller
                 $publication->name = $request->name;
                 $publication->description = $request->description;
 
-                $slug = strtolower($request->name);
-                $slug = str_replace(' ', '-', $slug);
+
+                $slug = Str::slug($request->name);
+
                 $publication->slug = $slug;
 
                 if ($request->hasFile('image')) {
@@ -84,9 +86,7 @@ class PublicationController extends Controller
             } else {
 
 
-                $slug = strtolower($request->name);
-                $slug = str_replace(' ', '-', $slug);
-
+                $slug = Str::slug($request->name);
 
                 $publication = Publication::create([
                     'name' => $request->name,

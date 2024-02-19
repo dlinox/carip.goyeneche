@@ -6,6 +6,7 @@ use App\Http\Requests\EventRequest;
 use App\Models\Event;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Illuminate\Support\Str;
 
 class EventController extends Controller
 {
@@ -66,9 +67,9 @@ class EventController extends Controller
             $item->date_publish = $request->datePublish;
             $item->external_link = $request->externalLink;
             //del titulo sacar el slug
-            $slug = strtolower($request->title);
-            $slug = str_replace(' ', '-', $slug);
+            $slug = Str::slug($request->title);
             $item->slug = $slug;
+
             $item->save();
         } else {
 
@@ -79,10 +80,9 @@ class EventController extends Controller
             $item->content = $request->content;
             $item->date_publish = $request->datePublish;
             $item->external_link = $request->externalLink;
-
-            $slug = strtolower($request->title);
-            $slug = str_replace(' ', '-', $slug);
+            $slug = Str::slug($request->title);
             $item->slug = $slug;
+
             $item->author_id = auth()->user()->id;
             $item->save();
         }

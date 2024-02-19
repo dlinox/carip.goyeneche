@@ -33,6 +33,7 @@ class PurchaseAndService extends Model
 
     public function getIconPathAttribute()
     {
-        return asset('storage/' . $this->icon);
+
+        return $this->icon ? asset('uploads/' . $this->icon) : null;
     }
 }

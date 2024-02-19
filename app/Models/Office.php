@@ -28,7 +28,9 @@ class Office extends Model
 
     public function getImageUrlAttribute()
     {
-        return asset('storage/' . $this->image);
+        
+        return $this->image ? asset('uploads/' . $this->image) : null;
+
     }
 
     public $headers =  [

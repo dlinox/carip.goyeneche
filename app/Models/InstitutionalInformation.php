@@ -10,7 +10,7 @@ class InstitutionalInformation extends Model
     use HasFactory;
 
     protected $table = 'institutional_information';
-    
+
     protected $fillable = [
         'name',
         'description',
@@ -43,17 +43,17 @@ class InstitutionalInformation extends Model
 
     public function getLogoUrlAttribute()
     {
-        return $this->logo ? asset('storage/' . $this->logo) : null;
+        
+        return $this->logo ? asset('uploads/' . $this->logo) : null;
     }
 
     public function getFaviconUrlAttribute()
     {
-        return $this->favicon ? asset('storage/' . $this->favicon) : null;
+        return $this->favicon ? asset('uploads/' . $this->favicon) : null;
     }
 
     public function getOrganigramUrlAttribute()
     {
-        return $this->organigram ? asset('storage/' . $this->organigram) : null;
+        return $this->organigram ? asset('uploads/' . $this->organigram) : null;
     }
-
 }

@@ -33,6 +33,7 @@ class AnnouncementDocument extends Model
 
     public function getFileUrlAttribute()
     {
-        return asset("storage/" . $this->file);
+        return $this->file ? asset('uploads/' . $this->file) : null;
+
     }
 }

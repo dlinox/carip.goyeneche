@@ -16,7 +16,7 @@ class GuidanceDocument extends Model
         'guide_file', //PDF
         'resolution_name',
         'resolution_file', //PDF
-        'date_published', 
+        'date_published',
         'is_active',
         'author_id'
     ];
@@ -37,12 +37,12 @@ class GuidanceDocument extends Model
 
     public function getGuideFileUrlAttribute()
     {
-        return asset('storage/' . $this->guide_file);
+        return $this->guide_file ? asset('uploads/' . $this->guide_file) : null;
     }
 
     public function getResolutionFileUrlAttribute()
     {
-        return asset('storage/' . $this->resolution_file);
+        return $this->resolution_file ? asset('uploads/' . $this->resolution_file) : null;
     }
 
 
@@ -55,5 +55,4 @@ class GuidanceDocument extends Model
         ['text' => "Fecha de publicación", 'value' => "date_published", 'short' => false, 'order' => 'ASC'],
         ['text' => "Estado", 'value' => "is_active", 'short' => false, 'order' => 'ASC'],
     ];
-
 }

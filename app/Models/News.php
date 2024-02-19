@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class News extends Model
 {
@@ -30,12 +31,19 @@ class News extends Model
 
     protected $appends = [
         'image_url',
-        'author_name'
+        'author_name',
+        'slug_url'
     ];
+
+    public function getSlugUrlAttribute()
+    {
+        return Str::slug($this->title);
+    }
+
 
     public function getImageUrlAttribute()
     {
-        return $this->image ? asset('uploads/' . $this->image) : 's';
+        return $this->image ? asset('uploads/' . $this->image) : null;
     }
 
     public function getAuthorNameAttribute()

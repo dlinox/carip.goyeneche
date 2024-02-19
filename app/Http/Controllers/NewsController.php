@@ -7,6 +7,7 @@ use App\Models\News;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
+use Illuminate\Support\Str;
 
 class NewsController extends Controller
 {
@@ -67,8 +68,8 @@ class NewsController extends Controller
             $news->content = $request->content;
             $news->date_publish = $request->date_publish;
             $news->external_link = $request->external_link;
-            $slug = strtolower($request->title);
-            $slug = str_replace(' ', '-', $slug);
+            $slug = Str::slug($request->title);
+
             $news->slug = $slug;
             $news->save();
         } else {
@@ -80,9 +81,7 @@ class NewsController extends Controller
             $news->content = $request->content;
             $news->date_publish = $request->date_publish;
             $news->external_link = $request->external_link;
-
-            $slug = strtolower($request->title);
-            $slug = str_replace(' ', '-', $slug);
+            $slug = Str::slug($request->title);
             $news->slug = $slug;
             $news->author_id = auth()->user()->id;
             $news->save();

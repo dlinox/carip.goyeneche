@@ -164,6 +164,14 @@ class ApiController extends Controller
         return response()->json($news);
     }
 
+    public function getNewsRelated($id)
+    {
+        $news = \App\Models\News::where('id', '!=', $id)
+            ->orderBy('created_at', 'DESC')
+            ->limit(5)->get();
+        return response()->json($news);
+    }
+
 
     public function eventos(Request $request)
     {
