@@ -238,4 +238,11 @@ class ApiController extends Controller
 
         return response()->json($publicaciones);
     }
+
+    //get avisos
+    public function getAdvertisements()
+    {
+        $advertisements = \App\Models\Advertisement::where('is_active', true)->get();
+        return response()->json($advertisements);
+    }
 }
