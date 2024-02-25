@@ -101,5 +101,8 @@ Route::get('/publicaciones/{slug}', [\App\Http\Controllers\Api\ApiController::cl
 //getPublicacionesByAuthorArea
 Route::get('/publicaciones/author-area/{id}', [\App\Http\Controllers\Api\ApiController::class, 'getPublicacionesByAuthorArea']);
 
-//getAdvertisements
+//getAdvertisementsp
 Route::get('/advertisements', [\App\Http\Controllers\Api\ApiController::class, 'getAdvertisements']);
+
+//specialties
+Route::get('/specialties', [\App\Http\Controllers\Api\ApiController::class, 'specialties']);

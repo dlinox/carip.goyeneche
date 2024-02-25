@@ -10,6 +10,7 @@ use App\Models\InstitutionalInformation;
 use App\Models\InstitutionalObjetive;
 use App\Models\Office;
 use App\Models\ServicePortfolio;
+use App\Models\Specialty;
 use Illuminate\Http\Request;
 
 class ApiController extends Controller
@@ -111,10 +112,36 @@ class ApiController extends Controller
         return response()->json($items);
     }
 
+    public function specialties()
+    {
+
+        $items = Specialty::select('id', 'name')->where('is_active', true)->orderBy('name', 'ASC')->get();
+        return response()->json($items);
+    }
+
     public function doctors(Request $request)
     {
-        $itemsPerPage = $request->limit ? $request->limit : 10;
-        $items = \App\Models\Worker::where('is_active', true)->orderBy('created_at', 'DESC')->paginate($itemsPerPage);
+        $perPage = $request->input('perPage', 10);
+
+        $query = \App\Models\Worker::query();
+
+
+        $query->where('is_active', true);
+
+
+        $query->orderBy('created_at', 'DESC');
+
+        if ($request->has('term')) {
+            $query->where('name', 'LIKE', "%{$request->term}%");
+        }
+
+        //filtar por especialidad que no sea null y no sea ""
+
+        if ($request->has('specialty') && $request->specialty != "" ) {
+            $query->where('specialty_id', $request->specialty);
+        }
+
+        $items = $query->paginate($perPage)->appends($request->query());
         return response()->json($items);
     }
 
