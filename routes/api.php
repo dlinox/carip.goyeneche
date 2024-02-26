@@ -106,3 +106,6 @@ Route::get('/advertisements', [\App\Http\Controllers\Api\ApiController::class, '
 
 //specialties
 Route::get('/specialties', [\App\Http\Controllers\Api\ApiController::class, 'specialties']);
+
+//getNumber
+Route::get('/get-number', [\App\Http\Controllers\Api\ApiController::class, 'getNumbers']);

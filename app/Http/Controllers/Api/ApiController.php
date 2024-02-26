@@ -137,7 +137,7 @@ class ApiController extends Controller
 
         //filtar por especialidad que no sea null y no sea ""
 
-        if ($request->has('specialty') && $request->specialty != "" ) {
+        if ($request->has('specialty') && $request->specialty != "") {
             $query->where('specialty_id', $request->specialty);
         }
 
@@ -271,5 +271,21 @@ class ApiController extends Controller
     {
         $advertisements = \App\Models\Advertisement::where('is_active', true)->get();
         return response()->json($advertisements);
+    }
+
+    //get number of news, doctors, especialidades
+    public function getNumbers()
+    {
+        $news = \App\Models\News::where('is_active', true)->count();
+        $doctors = \App\Models\Worker::where('is_active', true)->where('is_doctor', true)->count();
+        $specialties = \App\Models\Specialty::where('is_active', true)->count();
+
+        $numbers = [
+            'news' => $news,
+            'doctors' => $doctors,
+            'specialties' => $specialties
+        ];
+
+        return response()->json($numbers);
     }
 }
