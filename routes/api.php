@@ -109,3 +109,6 @@ Route::get('/specialties', [\App\Http\Controllers\Api\ApiController::class, 'spe
 
 //getNumber
 Route::get('/get-number', [\App\Http\Controllers\Api\ApiController::class, 'getNumbers']);
+
+//getLastRelatedPublications
+Route::get('/publicaciones/related/{id}', [\App\Http\Controllers\Api\ApiController::class, 'getLastRelatedPublications']);

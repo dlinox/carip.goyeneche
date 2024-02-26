@@ -266,6 +266,16 @@ class ApiController extends Controller
         return response()->json($publicaciones);
     }
 
+    //ultimas publicacionesrelacionad
+
+    public function getLastRelatedPublications($id)
+    {
+        $publicaciones = \App\Models\Publication::where('is_active', true)
+            ->where('id', '!=', $id)
+            ->orderBy('created_at', 'DESC')->limit(5)->get();
+        return response()->json($publicaciones);
+    }
+
     //get avisos
     public function getAdvertisements()
     {
