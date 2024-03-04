@@ -11,8 +11,10 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return Redirect::route('auth.index');
+    return view('web.index');
 });
+
+
 
 Route::name('auth.')->prefix('auth')->group(function () {
     Route::get('',  [AuthController::class, 'index'])->name('index')->middleware('guest');

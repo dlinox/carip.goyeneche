@@ -25,7 +25,7 @@ class ApiController extends Controller
             'address' => $InstitutionalInformation->address,
             'phone' => $InstitutionalInformation->phone,
             'email' => $InstitutionalInformation->email,
-            'logo' => asset('storage/' . $InstitutionalInformation->logo),
+            'logo' => asset('uploads/' . $InstitutionalInformation->logo),
 
         ];
 
