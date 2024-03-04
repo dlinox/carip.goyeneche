@@ -10,8 +10,12 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
 
+// Route::get('/', function () {
+//     return view('web.index');
+// });
+
 Route::get('/', function () {
-    return view('web.index');
+    return Redirect::to('/auth');
 });
 
 
@@ -70,7 +74,7 @@ Route::middleware('auth')->name('a.')->prefix('a')->group(function () {
     //sliders
     Route::resource('sliders', \App\Http\Controllers\SliderController::class)->middleware(['can:a.sliders']);
     Route::patch('sliders/{id}/change-state',  [\App\Http\Controllers\SliderController::class, 'changeState'])->middleware(['can:a.sliders']);
-    
+
     //advertisements
     Route::resource('advertisements', \App\Http\Controllers\AdvertisementController::class)->middleware(['can:a.sliders']);
     Route::patch('advertisements/{id}/change-state',  [\App\Http\Controllers\AdvertisementController::class, 'changeState'])->middleware(['can:a.sliders']);
@@ -118,5 +122,4 @@ Route::middleware('auth')->name('a.')->prefix('a')->group(function () {
     Route::resource('events', \App\Http\Controllers\EventController::class)->middleware(['can:a.events']);
     Route::patch('events/{id}/change-state',  [\App\Http\Controllers\EventController::class, 'changeState'])->middleware(['can:a.events']);
     Route::patch('events/{id}/change-featured', [\App\Http\Controllers\EventController::class, 'changeFeatured'])->middleware(['can:a.events']);
-    
 });
