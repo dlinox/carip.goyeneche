@@ -9,6 +9,7 @@ use App\Models\FinalService;
 use App\Models\InstitutionalInformation;
 use App\Models\InstitutionalObjetive;
 use App\Models\Office;
+use App\Models\PurchaseAndService;
 use App\Models\ServicePortfolio;
 use App\Models\Specialty;
 use Illuminate\Http\Request;
@@ -26,8 +27,12 @@ class ApiController extends Controller
             'phone' => $InstitutionalInformation->phone,
             'email' => $InstitutionalInformation->email,
             'logo' => asset('uploads/' . $InstitutionalInformation->logo),
+            //contizaciones y servicios
+            'purchaseAndService' => PurchaseAndService::first()->url_information,
 
         ];
+
+
 
         return response()->json($generalInformation);
     }
