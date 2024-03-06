@@ -126,7 +126,7 @@ class ApiController extends Controller
 
     public function doctors(Request $request)
     {
-        $perPage = $request->input('perPage', 10);
+        $perPage = $request->input('perPage', 12);
 
         $query = \App\Models\Worker::query();
 
